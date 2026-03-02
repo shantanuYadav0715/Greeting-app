@@ -1,0 +1,262 @@
+/* ============================================================
+   GREETING APP — style.css
+   Aesthetic: Warm editorial, inky navy + citrus accent
+   ============================================================ */
+
+/* ---------- CSS Variables ---------- */
+:root {
+  --bg-from:    #0d0f1a;
+  --bg-to:      #1a1030;
+  --card-bg:    rgba(255, 255, 255, 0.04);
+  --card-border:rgba(255, 255, 255, 0.10);
+  --accent:     #f9c846;
+  --accent-glow:rgba(249, 200, 70, 0.35);
+  --text-main:  #f0eee8;
+  --text-muted: rgba(240, 238, 232, 0.50);
+  --input-bg:   rgba(255, 255, 255, 0.06);
+  --radius-card:24px;
+  --radius-btn: 14px;
+  --font-display:"Syne", sans-serif;
+  --font-body:  "DM Sans", sans-serif;
+  --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; }
+
+body {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--bg-from) 0%, var(--bg-to) 100%);
+  font-family: var(--font-body);
+  color: var(--text-main);
+  overflow: hidden;          /* clips canvas animations */
+  padding: 1.5rem;
+}
+
+/* ---------- FX Canvas (confetti / particles) ---------- */
+#fx-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  display: none;             /* shown by JS when animation runs */
+}
+
+/* ---------- Glow Burst Overlay ---------- */
+#glow-burst {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  border-radius: 50%;
+  transform-origin: center center;
+}
+
+/* ---------- Card ---------- */
+.card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-card);
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  padding: 2.75rem 2.5rem 2.5rem;
+}
+
+/* ---------- Logo Mark ---------- */
+.logo-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(145deg, #2a1f5c, #1a0f3e);
+  border: 1px solid rgba(249, 200, 70, 0.25);
+  border-radius: 18px;
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 4px 20px rgba(249, 200, 70, 0.12);
+}
+
+.logo-mark__wave {
+  font-size: 2rem;
+  display: block;
+  animation: wave-idle 2.4s ease-in-out infinite;
+  transform-origin: 70% 80%;
+}
+
+@keyframes wave-idle {
+  0%, 100% { transform: rotate(0deg); }
+  20%       { transform: rotate(18deg); }
+  40%       { transform: rotate(-10deg); }
+  60%       { transform: rotate(14deg); }
+  80%       { transform: rotate(-8deg); }
+}
+
+/* ---------- Typography ---------- */
+.headline {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  text-align: center;
+  margin-bottom: 0.6rem;
+}
+
+.headline em {
+  font-style: normal;
+  color: var(--accent);
+  text-shadow: 0 0 28px var(--accent-glow);
+}
+
+.sub {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin-bottom: 2rem;
+}
+
+/* ---------- Input Label ---------- */
+.input-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.55rem;
+}
+
+/* ---------- Input ---------- */
+.input-wrap {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.name-input {
+  width: 100%;
+  padding: 0.85rem 1.1rem;
+  background: var(--input-bg);
+  border: 1.5px solid rgba(255, 255, 255, 0.10);
+  border-radius: 12px;
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  outline: none;
+  transition:
+    border-color var(--transition),
+    background var(--transition),
+    box-shadow var(--transition);
+}
+
+.name-input::placeholder { color: var(--text-muted); }
+
+.name-input:focus {
+  border-color: var(--accent);
+  background: rgba(249, 200, 70, 0.05);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+/* ---------- Greet Button ---------- */
+.greet-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.5rem;
+  background: var(--accent);
+  color: #13101e;
+  border: none;
+  border-radius: var(--radius-btn);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    filter var(--transition);
+  box-shadow: 0 4px 18px var(--accent-glow);
+}
+
+/* Shimmer sweep on hover */
+.greet-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.3) 50%, transparent 60%);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.greet-btn:hover::before  { transform: translateX(100%); }
+.greet-btn:hover          { transform: translateY(-2px); box-shadow: 0 8px 28px var(--accent-glow); filter: brightness(1.08); }
+.greet-btn:active         { transform: translateY(0px) scale(0.97); }
+
+.greet-btn__icon {
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+.greet-btn:hover .greet-btn__icon { transform: rotate(20deg) scale(1.25); }
+
+/* ---------- Greeting Output ---------- */
+.greeting-output {
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.6rem;
+  overflow: hidden;
+}
+
+.greeting-text {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 5vw, 1.9rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: var(--text-main);
+  animation: greeting-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.greeting-text .name-highlight {
+  color: var(--accent);
+  text-shadow: 0 0 22px var(--accent-glow);
+}
+
+@keyframes greeting-in {
+  from { opacity: 0; transform: translateY(18px) scale(0.92); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+/* ---------- Animations: Glow Burst ---------- */
+@keyframes burst-expand {
+  0%   { transform: scale(0.2); opacity: 0.85; }
+  60%  { transform: scale(2.8); opacity: 0.40; }
+  100% { transform: scale(4);   opacity: 0; }
+}
+
+.glow-burst-active {
+  animation: burst-expand 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+  .card { padding: 2rem 1.5rem; }
+  .headline { font-size: 1.9rem; }
+}
