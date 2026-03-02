@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Greet — Say Hello</title>
+  <!-- Google Font: Syne (display) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Full-screen canvas for particle animations -->
+  <canvas id="fx-canvas"></canvas>
+
+  <!-- Radial glow burst overlay -->
+  <div id="glow-burst"></div>
+
+  <!-- Main card -->
+  <main class="card" role="main">
+    <div class="card__inner">
+
+      <!-- Icon / logo mark -->
+      <div class="logo-mark" aria-hidden="true">
+        <span class="logo-mark__wave">👋</span>
+      </div>
+
+      <h1 class="headline">Say <em>Hello</em></h1>
+      <p class="sub">Type your name and we'll greet you with flair.</p>
+
+      <!-- Form group -->
+      <label class="input-label" for="name-input">Enter Your Name</label>
+      <div class="input-wrap">
+        <input
+          id="name-input"
+          class="name-input"
+          type="text"
+          placeholder="Type your name here"
+          maxlength="40"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <span class="input-underline"></span>
+      </div>
+
+      <!-- Greet button -->
+      <button id="greet-btn" class="greet-btn" type="button">
+        <span class="greet-btn__text">Greet</span>
+        <span class="greet-btn__icon" aria-hidden="true">✨</span>
+      </button>
+
+      <!-- Greeting output -->
+      <div id="greeting-output" class="greeting-output" aria-live="polite" aria-atomic="true">
+        <!-- Greeting text injected here by JS -->
+      </div>
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
